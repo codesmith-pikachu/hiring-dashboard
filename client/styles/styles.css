@@ -11,3 +11,8 @@ h1 {
   /* font-size: 24px;
   color: red; */
 }
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+ 
+}
