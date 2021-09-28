@@ -1,13 +1,13 @@
 /* reset */
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   margin: 0;
-  padding: 0;
-  border: 1px solid red;
-  font-size: 14px;
+  padding: 0; */
+  /* border: 1px solid red; */
+  /* font-size: 14px; */
 }
 
 h1 {
-  font-size: 24px;
-  color: red;
+  /* font-size: 24px;
+  color: red; */
 }
