@@ -1,16 +1,16 @@
 import React from "react";
 import {Flex, Heading, Input, Button, SimpleGrid, VStack, GridItem, colSpan,
-	FormControl, FormLabel, Spacer } from "@chakra-ui/react";
+	FormControl, FormLabel, useColorModeValue } from "@chakra-ui/react";
 import useForm from "../hooks/useForm.jsx";
 
 function Signup (){
 
 	const [values, handleChange] = useForm({firstName: "", lastName:"", username: "", email:"",  password: ""});
-
+	const format = useColorModeValue("gray.100", "gray.700");
 	return(
 		<>
 			<Flex direction="column" alignItems="center" justifyContent="center"  
-				background="gray.100" h="100%" borderRadius={5} boxShadow="lg">
+				background={format} h="100%" borderRadius={5} boxShadow="lg">
 				<Flex direction="columnReverse" alignItems="center" justifyContent="center" h="5vh" w="60vw">
 					<Heading mt={6}>Sign up</Heading>
 				</Flex>
@@ -51,7 +51,7 @@ function Signup (){
 						<GridItem colSpan={2}>
 						</GridItem>
 						<GridItem colSpan={2}>
-							<Button variant="primary" size="lg" w="full" background="blue.100">
+							<Button  size="lg" w="full" colorScheme="teal">
             Sign Up
 							</Button>
 						</GridItem>
