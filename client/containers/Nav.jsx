@@ -45,6 +45,13 @@ function Nav() {
 	// const { isOpen, onOpen, onClose } = useDisclosure();
 	const {toggleColorMode} = useColorMode();
 	const [state, dispatch] = useContext(AppContext);
+
+	const handleLogout = () => {
+		dispatch({ type:"LOG_OUT", payload: null });
+		localStorage.clear();
+		console.log(state);
+	};
+
 	return (
 		<>
 			<Box bg={useColorModeValue("gray.100", "gray.900")} px={4}  fontSize={16} borderBottom="1px" borderColor="blackAlpha.300">
@@ -79,18 +86,21 @@ function Nav() {
 								variant={"link"}
 								cursor={"pointer"}
 								minW={0}>
-								<Avatar
+								{ state ?	<Avatar
+									name={state.first_name +"" + state.last_name}
 									size={"md"}
-									// src={
-									// 	"https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-									// }
-								/>
+									
+								/>: <Avatar
+								
+									size={"md"}
+								
+								/>}
 							</MenuButton>
 							<MenuList>
 								{state && <MenuItem>Account Overview</MenuItem>}
-								<MenuLink to="/login"><MenuItem>Sign in</MenuItem></MenuLink>
-								<MenuLink to="/signup"><MenuItem>Sign up</MenuItem></MenuLink>
-								{state && <MenuItem>Sign Out</MenuItem>}
+								{!state && <MenuLink to="/login"><MenuItem>Sign in</MenuItem></MenuLink>}
+								{!state && <MenuLink to="/signup"><MenuItem>Sign up</MenuItem></MenuLink>}
+								{state && <MenuItem onClick={()=> handleLogout()}>Sign Out</MenuItem>}
 							</MenuList>
 						</Menu>
 					</Flex>

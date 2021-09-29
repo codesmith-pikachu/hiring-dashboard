@@ -1,7 +1,7 @@
 import React from "react";
 import {Flex, Heading, Text, VStack, Input, Button, useColorMode, useColorModeValue, SimpleGrid } from "@chakra-ui/react";
 import { motion} from "framer-motion";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../hooks/useFetch.jsx";
 function CompanyPage (){
 	const MotionFlex = motion(Flex);
 	return(

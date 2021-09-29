@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 import CompanyCard from "../components/CompanyCard.jsx";
 import {Flex, Heading, Text,  Input, Button, useColorMode, useColorModeValue, SimpleGrid, 
 	Modal,
@@ -12,11 +12,14 @@ import {Flex, Heading, Text,  Input, Button, useColorMode, useColorModeValue, Si
 import { motion} from "framer-motion";
 import useForm from "../hooks/useForm.jsx";
 import useFetch from "../hooks/useFetch.jsx";
+import {AppContext} from "./App.jsx";
 function HomePage(){
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const format = useColorModeValue("gray.100", "gray.700");
 	const MotionFlex = motion(Flex);
 	const [values, handleChange] = useForm({name: "", url: ""});
+	const [state, dispatch] = useContext(AppContext);
+
 	function poster(data) {
 		fetch("/company", {
 			method: "POST",
@@ -31,6 +34,14 @@ function HomePage(){
 			})
 			.catch((err) => console.log("Error in poster:", err));
 	}
+
+	// useEffect(() => {
+	// 	const loggedInUser = localStorage.getItem("user");
+	// 	if (loggedInUser) {
+	// 		const foundUser = JSON.parse(loggedInUser);
+	// 		dispatch({ type:"LOGIN", payload: foundUser });
+	// 	}
+	// }, []);
 	return(
 		<>  <SimpleGrid columns={2} gap={4}>
 			<CompanyCard/>

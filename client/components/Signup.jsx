@@ -1,13 +1,14 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import {Flex, Heading, Input, Button, SimpleGrid, VStack, GridItem, colSpan,
-	FormControl, FormLabel, useColorModeValue } from "@chakra-ui/react";
+FormControl, FormLabel, useColorModeValue } from "@chakra-ui/react";
 import useForm from "../hooks/useForm.jsx";
+import {AppContext} from "../containers/App.jsx";
 
 function Signup (){
 
 	const [values, handleChange] = useForm({first_name: "", last_name:"", username: "", email:"",  password: ""});
 	const format = useColorModeValue("gray.100", "gray.700");
-
+	const [state, dispatch] = useContext(AppContext);
 	function poster(data) {
 		fetch("/signup", {
 			method: "POST",
@@ -18,13 +19,11 @@ function Signup (){
 		})
 			.then((resp) => resp.json())
 			.then((data) => {
-				console.log(data);
+				dispatch({ type:"LOGIN", payload: data });
 			})
 			.catch((err) => console.log("Error in poster:", err));
 	}
-	useEffect(()=>{
-		console.log(values);
-	},[values]);
+	
 	
 	return(
 		<>
@@ -63,7 +62,7 @@ function Signup (){
 						<GridItem colSpan={2}>
 							<FormControl>
 								<FormLabel>Password</FormLabel>
-								<Input placeholder="***********" name="password" onChange={handleChange}/>
+								<Input placeholder="***********" name="password" onChange={handleChange} type="password"/>
 							</FormControl>
 						</GridItem>
 				

@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import {Flex, Heading, Input, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import useForm from "../hooks/useForm.jsx";
-
+import {AppContext} from "../containers/App.jsx";
 function Signin (){
 	const format = useColorModeValue("gray.200", "gray.700");
 	const [values, handleChange] = useForm({username: "", password: ""});
+	const [state, dispatch] = useContext(AppContext);
+
 	function login(data) {
-		fetch("/signup", {
-			method: "GET",
+		fetch("/login", {
+			method: "POST",
 			headers: {
 				"Content-Type": "Application/JSON",
 			},
@@ -16,10 +18,19 @@ function Signin (){
 		})
 			.then((resp) => resp.json())
 			.then((data) => {
+				dispatch({ type:"LOGIN", payload: data });
+				localStorage.setItem("user", data);
 				console.log(data);
 			})
 			.catch((err) => console.log("Error in login:", err));
 	}
+
+	// function poster(data) {
+	// 	fetch(`/login?email=${data.email}&password=${data.password}`)
+	// 		.then(data => data.json())
+	// 		.then(res => console.log(res))
+	// 		.catch(err => console.log("Login error:", err));
+	// }
 	
 	useEffect(()=>{
 		console.log(values);

@@ -10,7 +10,7 @@ import CompanyPage from "../containers/CompanyPage.jsx";
 const appReducer = (state, action) => {
 	switch (action.type) {
 	case "LOG_OUT":
-		return null;
+		return  action.payload;
 	case "LOGIN":
 		return action.payload;
 	default:
