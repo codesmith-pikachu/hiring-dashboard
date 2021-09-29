@@ -34,8 +34,10 @@ module.exports = {
     devMiddleware: {
       publicPath: '/build/'
     },
-    // proxy: {
-    //   '/': 'http://localhost:3000/'
-    // },
+    proxy: {
+      '/signup': 'http://localhost:3000',
+      '/login': 'http://localhost:3000',
+      '/api': 'http://localhost:3000'
+    },
   }
 }
