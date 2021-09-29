@@ -7,12 +7,30 @@ import {Flex, Heading, Text,  Input, Button, useColorMode, useColorModeValue, Si
 	ModalHeader,
 	ModalFooter,
 	ModalBody,
-	ModalCloseButton, useDisclosure} from "@chakra-ui/react";
+	ModalCloseButton, useDisclosure, VStack, GridItem, colSpan,
+	FormControl, FormLabel,} from "@chakra-ui/react";
 import { motion} from "framer-motion";
+import useForm from "../hooks/useForm.jsx";
+import useFetch from "../hooks/useFetch.jsx";
 function HomePage(){
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const format = useColorModeValue("gray.100", "gray.700");
 	const MotionFlex = motion(Flex);
+	const [values, handleChange] = useForm({name: "", url: ""});
+	function poster(data) {
+		fetch("/company", {
+			method: "POST",
+			headers: {
+				"Content-Type": "Application/JSON",
+			},
+			body: JSON.stringify(data),
+		})
+			.then((resp) => resp.json())
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((err) => console.log("Error in poster:", err));
+	}
 	return(
 		<>  <SimpleGrid columns={2} gap={4}>
 			<CompanyCard/>
@@ -20,7 +38,8 @@ function HomePage(){
 				background={format} p={12} borderRadius={6} boxShadow="lg"
 				whileHover={{ scale: 1.1 }}
 				whileTap={{ scale: 0.9 }} 
-				onClick={onOpen}>
+				onClick={onOpen}
+			>
 				<Heading fontSize="2.8rem">+</Heading>
 
 			</MotionFlex>
@@ -31,14 +50,30 @@ function HomePage(){
 				<ModalHeader>Company Info</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
-               
+					<VStack h="50vh"  alignItems="center" justifyContent="center" width="70%" p={4} mb="auto">
+					
+						<SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
+							<GridItem colSpan={2}>
+								<FormControl>
+									<FormLabel>Company Name</FormLabel>
+									<Input placeholder="VampKing" name="name" onChange={handleChange}/>
+								</FormControl>
+							</GridItem>
+							<GridItem colSpan={2}>
+								<FormControl>
+									<FormLabel>Company Url</FormLabel>
+									<Input placeholder="wexample" name="url" onChange={handleChange}/>
+								</FormControl>
+							</GridItem>
+						</SimpleGrid>
+					</VStack>
 				</ModalBody>
 
 				<ModalFooter>
 					<Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
 					</Button>
-					<Button variant="ghost">Secondary Action</Button>
+					<Button colorScheme="purple" onClick={()=> poster(values)}>ADD</Button>
 				</ModalFooter>
 			</ModalContent>
 		</Modal>

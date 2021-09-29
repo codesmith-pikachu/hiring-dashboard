@@ -13,7 +13,8 @@ function CompanyCard(){
 		<MotionFlex w="12rem" h="20rem" justifyContent="center" alignItems="center" 
 			background={format} p={12} borderRadius={6} boxShadow="lg"
 			whileHover={{ scale: 1.1 }}
-			whileTap={{ scale: 0.9 }}>
+			whileTap={{ scale: 0.9 }}
+		>
 			<Heading fontSize="1.5rem">Google</Heading>
 
 		</MotionFlex>
