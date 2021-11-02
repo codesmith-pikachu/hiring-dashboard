@@ -13,6 +13,7 @@ import { motion} from "framer-motion";
 import useForm from "../hooks/useForm.jsx";
 import useFetch from "../hooks/useFetch.jsx";
 import {AppContext} from "./App.jsx";
+import {Link} from "react-router-dom";
 function HomePage(){
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const format = useColorModeValue("gray.100", "gray.700");
@@ -44,7 +45,7 @@ function HomePage(){
 	// }, []);
 	return(
 		<>  <SimpleGrid columns={2} gap={4}>
-			<CompanyCard/>
+			<Link to="/company"><CompanyCard/></Link>
 			<MotionFlex w="12rem" h="20rem" justifyContent="center" alignItems="center" 
 				background={format} p={12} borderRadius={6} boxShadow="lg"
 				whileHover={{ scale: 1.1 }}

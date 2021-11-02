@@ -45,7 +45,7 @@ const App = () =>{
 							<Route exact path='/signup'>
 								<Signup />
 							</Route>
-							<Route exact path='/comp'>
+							<Route exact path='/company'>
 								<CompanyPage />
 							</Route>
 						</Flex>

@@ -4,14 +4,15 @@ import { motion} from "framer-motion";
 import useFetch from "../hooks/useFetch.jsx";
 function CompanyPage (){
 	const MotionFlex = motion(Flex);
+	const format = useColorModeValue("gray.100", "gray.700");
 	return(
 		<>
 			<Flex direction="column" alignItems="center" justifyContent="center" h="100%"
-				background="gray.200"
+				background={format}
 				borderRadius={6} p={3}>
 				<Flex  direction="columnReverse" alignItems="center" justifyContent="center" h="5vh" w="60vw">
 					<Flex fontSize="2rem" borderBottom="1px" borderColor="blackAlpha.300" w="100%" 
-						justifyContent="center" alignItems="center" mb={3}>Title</Flex>
+						justifyContent="center" alignItems="center" mb={3}>Google</Flex>
 				</Flex>
 				<MotionFlex h="4rem"  alignItems="center" justifyContent="center" width="90%" p={4} mb="auto"
 					border="1px" borderColor="blackAlpha.400" borderRadius={3} 
